@@ -1,0 +1,19 @@
+{
+  "name": "nisit-trade",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NisitTrade - React Native + Next.js + Tailwind monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "npm run dev --workspace=web",
+    "mobile": "npm run start --workspace=mobile",
+    "web:build": "npm run build --workspace=web",
+    "web:start": "npm run start --workspace=web"
+  },
+  "keywords": ["react-native", "nextjs", "tailwind", "monorepo"],
+  "author": "",
+  "license": "MIT"
+}
