@@ -1,10 +1,12 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class SellPage extends StatelessWidget {
   const SellPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Sell Page'));
+    return const Center(
+      child: Text('SellPage'),
+    );
   }
 }
