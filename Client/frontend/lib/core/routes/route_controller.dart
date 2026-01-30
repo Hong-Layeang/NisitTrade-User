@@ -3,14 +3,8 @@ import '../../features/auth/pages/forgot_password_page.dart';
 import '../../features/auth/pages/login_page.dart';
 import '../../features/auth/pages/signup_page.dart';
 import '../../features/auth/pages/welcome_page.dart';
-import '../../features/community/pages/community_page.dart';
-import '../../features/marketplace/pages/marketplace_page.dart';
-import '../../features/marketplace/widgets/marketplace_app_bar.dart';
-import '../../features/profile/pages/profile_page.dart';
-import '../../features/search/pages/search_page.dart';
-import '../../features/sell/pages/sell_page.dart';
 import '../../features/splash/pages/splash_page.dart';
-import '../../shared/layouts/main_layouts.dart';
+import '../../shared/layouts/main_shell.dart';
 import 'app_routes.dart';
 
 Route<dynamic> controlRoute(RouteSettings settings) {
@@ -32,43 +26,27 @@ Route<dynamic> controlRoute(RouteSettings settings) {
 
     case AppRoutes.marketplace:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 0,
-          appBar: MarketplaceAppBar(chatBadgeCount: 6),
-          child: MarketplacePage(),
-        ),
+        builder: (_) => const MainShell(initialIndex: 0),
       );
 
     case AppRoutes.search:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 1,
-          child: SearchPage(),
-        ),
+        builder: (_) => const MainShell(initialIndex: 1),
       );
 
     case AppRoutes.sell:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 2,
-          child: SellPage(),
-        ),
+        builder: (_) => const MainShell(initialIndex: 2),
       );
 
     case AppRoutes.community:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 3,
-          child: CommunityPage(),
-        ),
+        builder: (_) => const MainShell(initialIndex: 3),
       );
 
     case AppRoutes.profile:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 4,
-          child: ProfilePage(),
-        ),
+        builder: (_) => const MainShell(initialIndex: 4),
       );
 
     default:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../core/constants/colors.dart';
 import '../../../mock/mock_data.dart';
+import '../../../shared/widgets/user_widgets.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -65,16 +67,9 @@ class _ProductCardState extends State<ProductCard> {
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
       child: Row(
         children: [
-          CircleAvatar(
+          UserAvatar(
+            imageUrl: widget.product.seller.avatarUrl,
             radius: 20,
-            backgroundImage: NetworkImage(widget.product.seller.avatarUrl),
-            onBackgroundImageError: (exception, stackTrace) {},
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey.shade300,
-              ),
-            ),
           ),
           const SizedBox(width: 10),
           Expanded(
@@ -288,21 +283,37 @@ class _ProductCardState extends State<ProductCard> {
 
           const SizedBox(width: 8),
 
-          // Add/Buy button
-          Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF00B4D8),
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.add,
-                color: Colors.white,
+          // Contact seller button
+          InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(20),
               ),
-              iconSize: 22,
-              padding: const EdgeInsets.all(6),
-              constraints: const BoxConstraints(),
+              child: const Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.send_rounded,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      'Chat',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],

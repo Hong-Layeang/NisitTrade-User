@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../mock/mock_data.dart';
-import '../widgets/category_list.dart';
+import '../../../shared/widgets/category_widgets.dart';
+import '../../../shared/widgets/empty_state.dart';
 import '../widgets/product_card.dart';
 
 class MarketplacePage extends StatefulWidget {
@@ -12,7 +13,7 @@ class MarketplacePage extends StatefulWidget {
 
 class _MarketplacePageState extends State<MarketplacePage> {
   final PageController _pageController = PageController();
-  Category? _selectedCategory;
+  int? _selectedCategoryIndex;
   List<Product> _filteredProducts = mockProducts;
 
   @override
@@ -21,12 +22,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
     super.dispose();
   }
 
-  void _onCategorySelected(Category? category) {
+  void _onCategorySelected(int? index) {
     setState(() {
-      _selectedCategory = category;
-      if (category == null) {
+      _selectedCategoryIndex = index;
+      if (index == null) {
         _filteredProducts = mockProducts;
       } else {
+        final category = mockCategories[index];
         _filteredProducts = mockProducts
             .where((product) => product.category.id == category.id)
             .toList();
@@ -38,15 +40,24 @@ class _MarketplacePageState extends State<MarketplacePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Category filter
-        CategoryList(onCategorySelected: _onCategorySelected),
-
-        const Divider(height: 1),
-
-        // TikTok-style vertical scrolling product feed
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          child: CategoryList(
+            categories: mockCategories,
+            selectedIndex: _selectedCategoryIndex,
+            onCategorySelected: _onCategorySelected,
+            height: 90,
+            circleSize: 56,
+          ),
+        ),
+        Divider(height: 1, color: Colors.grey.shade100),
         Expanded(
           child: _filteredProducts.isEmpty
-              ? _buildEmptyState()
+              ? const EmptyState(
+                  icon: Icons.shopping_bag_outlined,
+                  title: 'No products found',
+                  subtitle: 'Try selecting a different category',
+                )
               : PageView.builder(
                   controller: _pageController,
                   scrollDirection: Axis.vertical,
@@ -57,38 +68,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
         ),
       ],
-    );
-  }
-
-  Widget _buildEmptyState() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.shopping_bag_outlined,
-            size: 80,
-            color: Colors.grey.shade400,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'No products found',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.grey.shade600,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Try selecting a different category',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade500,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -84,11 +84,6 @@ final List<Category> mockCategories = [
     name: 'Books',
     imageUrl: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200',
   ),
-  const Category(
-    id: 'c6',
-    name: 'Sports',
-    imageUrl: 'https://images.unsplash.com/photo-1461896836934- voices-50fc3f85?w=200',
-  ),
 ];
 
 // Mock Sellers
@@ -297,5 +292,74 @@ final List<Product> mockProducts = [
     likes: 445,
     comments: 23,
     timeAgo: '1 month ago',
+  ),
+];
+
+// Student model for search
+class Student {
+  final String id;
+  final String name;
+  final String username;
+  final String avatarUrl;
+  final bool isFollowing;
+
+  const Student({
+    required this.id,
+    required this.name,
+    required this.username,
+    required this.avatarUrl,
+    this.isFollowing = false,
+  });
+}
+
+// Mock Students for search
+final List<Student> mockStudents = [
+  const Student(
+    id: 's1',
+    name: 'Lim Sokthea',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=11',
+  ),
+  const Student(
+    id: 's2',
+    name: 'Dara',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=12',
+  ),
+  const Student(
+    id: 's3',
+    name: 'Phan Sreyneang',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=5',
+  ),
+  const Student(
+    id: 's4',
+    name: 'Sreylin',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=9',
+  ),
+  const Student(
+    id: 's5',
+    name: 'Sok Chenda',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=8',
+  ),
+  const Student(
+    id: 's6',
+    name: 'Chenda',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=15',
+  ),
+  const Student(
+    id: 's7',
+    name: 'Rithy',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=33',
+  ),
+  const Student(
+    id: 's8',
+    name: 'Chea Vannak',
+    username: '@cadt',
+    avatarUrl: 'https://i.pravatar.cc/150?img=53',
   ),
 ];

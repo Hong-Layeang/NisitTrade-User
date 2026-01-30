@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../core/routes/app_routes.dart';
 
 class AppBottomNav extends StatelessWidget {
   final int currentIndex;
+  final ValueChanged<int>? onTabSelected;
 
-  const AppBottomNav({super.key, this.currentIndex = 0});
+  const AppBottomNav({
+    super.key,
+    this.currentIndex = 0,
+    this.onTabSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,38 +25,30 @@ class AppBottomNav extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(
-                context: context,
                 icon: Icons.home_rounded,
                 label: 'Marketplace',
                 index: 0,
-                route: AppRoutes.marketplace,
               ),
               _buildNavItem(
-                context: context,
                 icon: Icons.search_rounded,
                 label: 'Search',
                 index: 1,
-                route: AppRoutes.search,
               ),
-              _buildCenterButton(context),
+              _buildCenterButton(),
               _buildNavItem(
-                context: context,
                 icon: Icons.groups_rounded,
                 label: 'Community',
                 index: 3,
-                route: AppRoutes.community,
               ),
               _buildNavItem(
-                context: context,
                 icon: Icons.person_outline_rounded,
                 label: 'Profile',
                 index: 4,
-                route: AppRoutes.profile,
               ),
             ],
           ),
@@ -62,11 +58,9 @@ class AppBottomNav extends StatelessWidget {
   }
 
   Widget _buildNavItem({
-    required BuildContext context,
     required IconData icon,
     required String label,
     required int index,
-    required String route,
   }) {
     final isSelected = currentIndex == index;
     final color = isSelected ? const Color(0xFF00B4D8) : Colors.grey.shade600;
@@ -74,7 +68,7 @@ class AppBottomNav extends StatelessWidget {
     return InkWell(
       onTap: () {
         if (!isSelected) {
-          Navigator.pushReplacementNamed(context, route);
+          onTabSelected?.call(index);
         }
       },
       borderRadius: BorderRadius.circular(12),
@@ -103,10 +97,14 @@ class AppBottomNav extends StatelessWidget {
     );
   }
 
-  Widget _buildCenterButton(BuildContext context) {
+  Widget _buildCenterButton() {
+    final isSelected = currentIndex == 2;
+    
     return InkWell(
       onTap: () {
-        Navigator.pushReplacementNamed(context, AppRoutes.sell);
+        if (!isSelected) {
+          onTabSelected?.call(2);
+        }
       },
       borderRadius: BorderRadius.circular(12),
       child: Padding(
