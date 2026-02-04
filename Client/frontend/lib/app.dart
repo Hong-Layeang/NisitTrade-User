@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'core/routes/app_routes.dart';
-import 'core/routes/route_controller.dart';
+import 'utils/routes/app_routes.dart';
+import 'utils/routes/route_controller.dart';
 
 class NisitTradeApp extends StatelessWidget {
   const NisitTradeApp({super.key});
