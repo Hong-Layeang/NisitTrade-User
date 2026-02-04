@@ -47,7 +47,11 @@ Route<dynamic> controlRoute(RouteSettings settings) {
 
     case AppRoutes.sell:
       return MaterialPageRoute(
-        builder: (_) => MainLayout(currentNavIndex: 2, child: SellPage()),
+        builder: (_) => MainLayout(
+          currentNavIndex: 2,
+          appBar: const SellAppBar(),
+          child: SellPage(),
+        ),
       );
 
     case AppRoutes.community:
