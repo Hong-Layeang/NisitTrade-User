@@ -41,34 +41,25 @@ Route<dynamic> controlRoute(RouteSettings settings) {
 
     case AppRoutes.search:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 1,
-          child: SearchPage(),
-        ),
+        builder: (_) =>
+            const MainLayout(currentNavIndex: 1, child: SearchPage()),
       );
 
     case AppRoutes.sell:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 2,
-          child: SellPage(),
-        ),
+        builder: (_) => MainLayout(currentNavIndex: 2, child: SellPage()),
       );
 
     case AppRoutes.community:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 3,
-          child: CommunityPage(),
-        ),
+        builder: (_) =>
+            const MainLayout(currentNavIndex: 3, child: CommunityPage()),
       );
 
     case AppRoutes.profile:
       return MaterialPageRoute(
-        builder: (_) => const MainLayout(
-          currentNavIndex: 4,
-          child: ProfilePage(),
-        ),
+        builder: (_) =>
+            const MainLayout(currentNavIndex: 4, child: ProfilePage()),
       );
 
     default:

@@ -10,7 +10,7 @@ class MainLayouts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('NisitTrade')),
-      body: child,
+      body: SafeArea(child: child),
       bottomNavigationBar: const AppBottomNav(),
     );
   }
