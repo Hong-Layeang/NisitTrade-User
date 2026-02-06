@@ -99,6 +99,9 @@ class AppBottomNav extends StatelessWidget {
 
   Widget _buildCenterButton() {
     final isSelected = currentIndex == 2;
+    final activeColor = const Color(0xFF00B4D8);
+    final inactiveLabelColor = Colors.grey.shade600;
+    final inactiveBgColor = Color(0xFF80E2F1);
     
     return InkWell(
       onTap: () {
@@ -115,12 +118,12 @@ class AppBottomNav extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: const Color(0xFF00B4D8),
+                color: isSelected ? activeColor : inactiveBgColor,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.add,
-                color: Colors.white,
+                color: isSelected ? Colors.white : activeColor,
                 size: 22,
               ),
             ),
@@ -128,7 +131,7 @@ class AppBottomNav extends StatelessWidget {
             Text(
               'Sell Now',
               style: TextStyle(
-                color: Colors.grey.shade600,
+                color: isSelected ? activeColor : inactiveLabelColor,
                 fontSize: 11,
               ),
             ),
