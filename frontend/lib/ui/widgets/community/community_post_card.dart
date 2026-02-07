@@ -23,80 +23,87 @@ class CommunityPostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const contentPadding = EdgeInsets.symmetric(horizontal: 16);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            UserAvatar(imageUrl: post.author.avatarUrl, radius: 22),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        Padding(
+          padding: contentPadding,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              UserAvatar(imageUrl: post.author.avatarUrl, radius: 22),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post.author.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      post.author.username,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    post.author.name,
+                    post.timeAgo,
                     style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    post.author.username,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppColors.textSecondary,
-                      fontWeight: FontWeight.w500,
+                  InkWell(
+                    onTap: onMoreTap,
+                    borderRadius: BorderRadius.circular(12),
+                    child: const Padding(
+                      padding: EdgeInsets.all(2),
+                      child: Icon(
+                        Icons.more_horiz,
+                        color: AppColors.textSecondary,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  post.timeAgo,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                InkWell(
-                  onTap: onMoreTap,
-                  borderRadius: BorderRadius.circular(12),
-                  child: const Padding(
-                    padding: EdgeInsets.all(2),
-                    child: Icon(
-                      Icons.more_horiz,
-                      color: AppColors.textSecondary,
-                      size: 18,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 8),
-        Text(
-          post.content,
-          style: const TextStyle(
-            fontSize: 15,
-            height: 1.4,
-            color: AppColors.textPrimary,
+        Padding(
+          padding: contentPadding,
+          child: Text(
+            post.content,
+            style: const TextStyle(
+              fontSize: 15,
+              height: 1.4,
+              color: AppColors.textPrimary,
+            ),
           ),
         ),
         if (post.imageUrl != null) ...[
           const SizedBox(height: 10),
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
             child: AspectRatio(
-              aspectRatio: 16 / 9,
+              aspectRatio: 4 / 3,
               child: Image.network(
                 post.imageUrl!,
                 fit: BoxFit.cover,
@@ -113,29 +120,32 @@ class CommunityPostCard extends StatelessWidget {
           ),
         ],
         const SizedBox(height: 10),
-        Row(
-          children: [
-            _ActionButton(
-              icon: isLiked ? Icons.favorite : Icons.favorite_border,
-              label: _formatCount(post.likes),
-              color: isLiked ? Colors.redAccent : AppColors.textSecondary,
-              onTap: onLikeTap,
-            ),
-            const SizedBox(width: 18),
-            _ActionButton(
-              icon: Icons.mode_comment_outlined,
-              label: _formatCount(post.comments),
-              color: AppColors.textSecondary,
-              onTap: onCommentTap,
-            ),
-            const Spacer(),
-            _ActionButton(
-              icon: Icons.share_outlined,
-              label: '',
-              color: AppColors.textSecondary,
-              onTap: onShareTap,
-            ),
-          ],
+        Padding(
+          padding: contentPadding,
+          child: Row(
+            children: [
+              _ActionButton(
+                icon: isLiked ? Icons.favorite : Icons.favorite_border,
+                label: _formatCount(post.likes),
+                color: isLiked ? Colors.redAccent : AppColors.textSecondary,
+                onTap: onLikeTap,
+              ),
+              const SizedBox(width: 18),
+              _ActionButton(
+                icon: Icons.mode_comment_outlined,
+                label: _formatCount(post.comments),
+                color: AppColors.textSecondary,
+                onTap: onCommentTap,
+              ),
+              const Spacer(),
+              _ActionButton(
+                icon: Icons.near_me_outlined,
+                label: '',
+                color: AppColors.textSecondary,
+                onTap: onShareTap,
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         Divider(height: 1, color: Colors.grey.shade200),

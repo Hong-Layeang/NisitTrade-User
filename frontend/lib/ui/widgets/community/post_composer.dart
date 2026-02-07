@@ -13,71 +13,74 @@ class PostComposer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'want to post something?',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
-          ),
-        ),
-        const SizedBox(height: 12),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.grey.shade300),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'want to post something?',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
             ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.12),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Icon(
-                    Icons.add_a_photo_outlined,
-                    color: AppColors.primary,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                const Expanded(
-                  child: Text(
-                    'Enter your description',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: 14.5,
+          ),
+          const SizedBox(height: 12),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                ),
-                InkWell(
-                  onTap: onSend,
-                  borderRadius: BorderRadius.circular(20),
-                  child: const Padding(
-                    padding: EdgeInsets.all(4),
-                    child: Icon(
-                      Icons.send_rounded,
-                      color: Colors.grey,
+                    child: const Icon(
+                      Icons.add_a_photo_outlined,
+                      color: AppColors.primary,
                       size: 20,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      'Enter your description',
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 14.5,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: onSend,
+                    borderRadius: BorderRadius.circular(20),
+                    child: const Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Icon(
+                        Icons.send_rounded,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Divider(height: 1, color: Colors.grey.shade200),
-        const SizedBox(height: 8),
-      ],
+          const SizedBox(height: 8),
+          Divider(height: 1, color: Colors.grey.shade200),
+          const SizedBox(height: 8),
+        ],
+      ),
     );
   }
 }

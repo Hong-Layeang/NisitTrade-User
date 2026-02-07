@@ -4,7 +4,6 @@ import '../../../data/repositories/student_repository.dart';
 import '../../../models/community_post.dart';
 import '../../../models/student.dart';
 import '../../../utils/constants/colors.dart';
-import '../../widgets/common/user_widgets.dart';
 import '../../widgets/community/community_post_card.dart';
 import '../../widgets/community/post_composer.dart';
 
@@ -22,8 +21,8 @@ class _CommunityPageState extends State<CommunityPage>
   final StudentRepository _studentRepository = StudentRepositoryImpl();
   late final List<CommunityPost> _posts;
   late final List<Student> _friends;
+  List<CommunityPost>? _friendPosts;
   final Set<String> _likedPosts = {};
-  final Set<String> _followingStudents = {};
 
   @override
   void initState() {
@@ -31,6 +30,10 @@ class _CommunityPageState extends State<CommunityPage>
     _tabController = TabController(length: 2, vsync: this);
     _posts = _communityRepository.getPosts();
     _friends = _studentRepository.getStudents();
+    final friendAvatarUrls = _friends.map((friend) => friend.avatarUrl).toSet();
+    _friendPosts = _posts
+      .where((post) => friendAvatarUrls.contains(post.author.avatarUrl))
+      .toList();
   }
 
   @override
@@ -82,7 +85,7 @@ class _CommunityPageState extends State<CommunityPage>
 
   Widget _buildCommunityTab() {
     return ListView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 24),
       itemBuilder: (context, index) {
         if (index == 0) {
           return const PostComposer();
@@ -108,24 +111,37 @@ class _CommunityPageState extends State<CommunityPage>
   }
 
   Widget _buildFriendsTab() {
+    final friendPosts = _friendPosts ?? const <CommunityPost>[];
+    if (friendPosts.isEmpty) {
+      return const Center(
+        child: Text(
+          'No friend posts yet',
+          style: TextStyle(
+            color: AppColors.textSecondary,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      );
+    }
+
     return ListView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-      itemCount: _friends.length,
+      padding: const EdgeInsets.fromLTRB(0, 12, 0, 24),
+      itemCount: friendPosts.length,
       itemBuilder: (context, index) {
-        final student = _friends[index];
-        return StudentListTile(
-          student: student,
-          isFollowing: _followingStudents.contains(student.id),
-          onFollowTap: () {
+        final post = friendPosts[index];
+        return CommunityPostCard(
+          post: post,
+          isLiked: _likedPosts.contains(post.id),
+          onLikeTap: () {
             setState(() {
-              if (_followingStudents.contains(student.id)) {
-                _followingStudents.remove(student.id);
+              if (_likedPosts.contains(post.id)) {
+                _likedPosts.remove(post.id);
               } else {
-                _followingStudents.add(student.id);
+                _likedPosts.add(post.id);
               }
             });
           },
-          onTap: () {},
         );
       },
     );
