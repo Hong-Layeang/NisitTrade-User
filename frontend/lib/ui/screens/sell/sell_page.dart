@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/constants/colors.dart';
 import '../../widgets/sell/sell_form_widgets.dart';
 
 class SellPage extends StatelessWidget {
@@ -58,11 +59,25 @@ class SellPage extends StatelessWidget {
             const SizedBox(height: 18),
             const SectionLabel(text: 'Photos'),
             const SizedBox(height: 6),
-            const HelpText(
-              text:
-                  'Capture all the angles and details. Your first square is the key image. ',
+            Text.rich(
+              TextSpan(
+                text:
+                    'Capture all the angles and details. Your first square is the key image. ',
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: AppColors.textSecondary,
+                ),
+                children: const [
+                  TextSpan(
+                    text: 'At least 2 photos required.',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const InlineLink(text: 'At least 2 photos required.'),
             const SizedBox(height: 14),
             const PhotoGrid(count: 6),
             const SizedBox(height: 22),

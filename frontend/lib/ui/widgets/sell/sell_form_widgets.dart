@@ -50,41 +50,6 @@ class SectionLabel extends StatelessWidget {
   }
 }
 
-class HelpText extends StatelessWidget {
-  final String text;
-
-  const HelpText({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 13,
-        color: AppColors.textSecondary,
-      ),
-    );
-  }
-}
-
-class InlineLink extends StatelessWidget {
-  final String text;
-
-  const InlineLink({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 13,
-        color: AppColors.primary,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-}
-
 class OutlinedField extends StatelessWidget {
   final String hintText;
   final int maxLines;
