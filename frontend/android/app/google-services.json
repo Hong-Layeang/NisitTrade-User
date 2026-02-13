@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999262951922",
+    "project_id": "nisit-trade",
+    "storage_bucket": "nisit-trade.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999262951922:android:9a84f790e8d46bccca736b",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuXiZTEi7wNsaCJrg1_mGfqhMw8Qct6nQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
